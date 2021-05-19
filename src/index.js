@@ -13,6 +13,11 @@ const typeDefs = `
     type Query {
         hello: String!
         name:String!
+        bio:String!
+        age:Int!
+        employed:Boolean!
+        inStock:String!
+
     }
 
 `;
@@ -24,6 +29,12 @@ const resolvers = {
     },
     name() {
       return "Kelvin Onkundi Ndemo";
+    },
+    bio() {
+      return "I live in Jua";
+    },
+    inStock() {
+      return "True";
     },
   },
 };
