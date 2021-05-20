@@ -11,30 +11,42 @@ import { GraphQLServer } from "graphql-yoga";
 
 const typeDefs = `
     type Query {
-        hello: String!
-        name:String!
-        bio:String!
-        age:Int!
-        employed:Boolean!
-        inStock:String!
+      me : User
+      getPost:Post
+    }
 
+    type User {
+      id:ID!
+      name:String!
+      email:String!
+      age:Int
+    }
+
+    type Post {
+      ID:ID!
+      title:String!
+      description:String!
+      published:Boolean!
     }
 
 `;
 
 const resolvers = {
   Query: {
-    hello() {
-      return "This is my first query";
+    me() {
+      return {
+        id: "Kelvin",
+        name: "Kelvin",
+        email: "dsddsd@gmail.com",
+      };
     },
-    name() {
-      return "Kelvin Onkundi Ndemo";
-    },
-    bio() {
-      return "I live in Jua";
-    },
-    inStock() {
-      return "True";
+    getPost() {
+      return {
+        id: "4rt",
+        title: "Graphql 101",
+        description: "Gell",
+        published: false,
+      };
     },
   },
 };
