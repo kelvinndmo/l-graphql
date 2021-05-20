@@ -23,3 +23,10 @@
 - ID
 
 ### Creating Custom Types
+
+### Arguements passed to resolvers
+
+- Parent => Useful when working with relational data i.e when users have many posts
+- args => Operation Arguments.
+- context => Contextual data
+- Info => Information about operations sent to the server.

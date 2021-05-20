@@ -13,6 +13,9 @@ const typeDefs = `
     type Query {
       me : User
       getPost:Post
+      greeting(name: String): String!
+      getUser(user: String, b: String): User!
+      addTwoNumbers(a:Int, b:Int):Int!
     }
 
     type User {
@@ -47,6 +50,20 @@ const resolvers = {
         description: "Gell",
         published: false,
       };
+    },
+    greeting(parent, args, ctx, info) {
+      return args.name;
+    },
+    getUser(parent, args, ctx, info) {
+      return {
+        id: 12,
+        name: "Kelvin",
+        age: 40,
+        email: "novak@gmail.com",
+      };
+    },
+    addTwoNumbers(parent, args, ctx, info) {
+      return args.a + args.b;
     },
   },
 };
