@@ -1,0 +1,98 @@
+type Query {
+  me: User
+  post: Post
+  users(query: String): [User!]!
+  posts: [Post]
+}
+
+type Mutation {
+  createUser(data: CreateUserInput!): User!
+  createPost(data: CreatePostInput): Post!
+  createComment(data: CreateCommentInput): Comment!
+  deleteUser(userId: String!): User!
+  updateUser(id:ID!,data:UpdateUserInput ):User!
+  updateComment(id:ID!, data:UpdateCommentInput):Comment!
+  updatePost(id:ID!, data:UpdatePostInput):Post!
+}
+
+type Subscription {
+  count:Int!
+  comment(postId:ID!):CommentSubscriptionPayload!
+  post:PostSubscriptionPayload!
+}
+
+enum MutationTypeEnum {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  age: Int!
+}
+
+input UpdatePostInput {
+  title: String
+  body: String
+  published: Boolean
+}
+
+
+input UpdateCommentInput {
+  body:String
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  age: Int
+}
+
+input CreateCommentInput {
+  text: String!
+  user: String!
+  post: String!
+}
+
+input CreatePostInput {
+  title: String!
+  body: String!
+  published: Boolean!
+  author: ID!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  age: Int
+  posts: [Post]
+}
+
+type Comment {
+  id: ID!
+  author: User!
+  body: String!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  body: String!
+  published: Boolean!
+  author: User!
+  comments: [Comment!]!
+}
+
+
+type PostSubscriptionPayload {
+  mutation:String!
+  data:Post!
+}
+
+type CommentSubscriptionPayload {
+  mutation:MutationTypeEnum
+  data:Comment!
+}
